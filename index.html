@@ -4,1384 +4,1392 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAI — Evoluzione dei Modelli di Fruizione</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=DM+Mono:wght@400;500&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --rai-blue: #003087;
-    --rai-red: #D0021B;
-    --ink: #0A0A0F;
-    --paper: #F5F0E8;
-    --warm-white: #FDFAF4;
-    --accent-gold: #C8A84B;
-    --mid-gray: #6B6B6B;
-    --light-rule: #D8D0C0;
-    --highlight: #E8F0FF;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Libre Franklin', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* ─── COVER ─────────────────────────────────────── */
-  .cover {
-    min-height: 100vh;
-    background: var(--ink);
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cover::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 60px),
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 60px);
-    pointer-events: none;
-  }
-
-  .cover-top {
-    padding: 2.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.1s forwards;
-  }
-
-  .rai-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .rai-badge {
-    width: 48px;
-    height: 48px;
-    background: var(--rai-blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: white;
-    letter-spacing: -0.02em;
-  }
-
-  .rai-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    line-height: 1.4;
-  }
-
-  .cover-meta {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 0.1em;
-    text-align: right;
-    line-height: 1.6;
-  }
-
-  .cover-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 3rem;
-  }
-
-  .cover-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--rai-red);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.3s forwards;
-  }
-
-  .cover-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
-    font-weight: 900;
-    color: var(--warm-white);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    max-width: 820px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.5s forwards;
-  }
-
-  .cover-title em {
-    font-style: italic;
-    color: var(--accent-gold);
-  }
-
-  .cover-subtitle {
-    margin-top: 2.5rem;
-    max-width: 560px;
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.8;
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.7s forwards;
-  }
-
-  .cover-bottom {
-    padding: 2.5rem 3rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.9s forwards;
-  }
-
-  .team-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .team-tag strong {
-    color: rgba(255,255,255,0.7);
-    font-weight: 500;
-  }
-
-  .scroll-cue {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .scroll-line {
-    width: 40px;
-    height: 1px;
-    background: rgba(255,255,255,0.15);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--accent-gold);
-    animation: slideRight 2s ease-in-out infinite;
-  }
-
-  /* ─── SECTION WRAPPER ─────────────────────────── */
-  .section {
-    padding: 5rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--rai-red);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--rai-red);
-    flex-shrink: 0;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.9rem, 4vw, 3rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
-  }
-
-  .section-intro {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--mid-gray);
-    max-width: 640px;
-    margin-bottom: 3rem;
-    line-height: 1.8;
-  }
-
-  .rule {
-    width: 100%;
-    height: 1px;
-    background: var(--light-rule);
-    margin: 4rem 0;
-  }
-
-  /* ─── STAT GRID ───────────────────────────────── */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2px;
-    background: var(--light-rule);
-    border: 2px solid var(--light-rule);
-    margin-bottom: 3rem;
-  }
-
-  .stat-card {
-    background: var(--warm-white);
-    padding: 2rem 1.8rem;
-    position: relative;
-  }
-
-  .stat-card.accent {
-    background: var(--ink);
-    color: white;
-  }
-
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--rai-blue);
-    margin-bottom: 0.4rem;
-  }
-
-  .stat-card.accent .stat-number {
-    color: var(--accent-gold);
-  }
-
-  .stat-unit {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-  }
-
-  .stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--mid-gray);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-  }
-
-  .stat-card.accent .stat-label {
-    color: rgba(255,255,255,0.4);
-  }
-
-  .stat-desc {
-    font-size: 0.82rem;
-    color: var(--mid-gray);
-    line-height: 1.5;
-  }
-
-  .stat-card.accent .stat-desc {
-    color: rgba(255,255,255,0.55);
-  }
-
-  /* ─── DIAGNOSIS ───────────────────────────────── */
-  .diagnosis-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-  }
-
-  @media (max-width: 700px) {
-    .diagnosis-grid { grid-template-columns: 1fr; }
-    .section { padding: 3rem 1.5rem; }
-    .cover-top, .cover-body, .cover-bottom { padding-left: 1.5rem; padding-right: 1.5rem; }
-  }
-
-  .diagnosis-col h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 2px solid var(--ink);
-  }
-
-  .diagnosis-col.threat h3 {
-    border-color: var(--rai-red);
-    color: var(--rai-red);
-  }
-
-  .diagnosis-col.opp h3 {
-    border-color: var(--rai-blue);
-    color: var(--rai-blue);
-  }
-
-  .diagnosis-item {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-    align-items: flex-start;
-  }
-
-  .d-icon {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    font-weight: 500;
-  }
-
-  .diagnosis-col.threat .d-icon {
-    background: rgba(208,2,27,0.08);
-    color: var(--rai-red);
-    border: 1px solid rgba(208,2,27,0.2);
-  }
-
-  .diagnosis-col.opp .d-icon {
-    background: rgba(0,48,135,0.07);
-    color: var(--rai-blue);
-    border: 1px solid rgba(0,48,135,0.18);
-  }
-
-  .d-text {
-    font-size: 0.87rem;
-    line-height: 1.55;
-    color: #333;
-  }
-
-  /* ─── STRATEGY PILLARS ────────────────────────── */
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2px;
-    background: var(--light-rule);
-    border: 2px solid var(--light-rule);
-    margin-bottom: 3rem;
-  }
-
-  .pillar {
-    background: var(--warm-white);
-    padding: 2.5rem 2rem;
-    position: relative;
-    transition: background 0.25s;
-  }
-
-  .pillar:hover { background: white; }
-
-  .pillar-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-weight: 900;
-    color: rgba(0,0,0,0.05);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.04em;
-  }
-
-  .pillar-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--rai-red);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-  }
-
-  .pillar-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .pillar-body {
-    font-size: 0.85rem;
-    color: var(--mid-gray);
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
-  }
-
-  .pillar-actions {
-    list-style: none;
-    border-top: 1px solid var(--light-rule);
-    padding-top: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .pillar-actions li {
-    font-size: 0.8rem;
-    color: #444;
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.5;
-  }
-
-  .pillar-actions li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent-gold);
-    font-size: 0.75rem;
-  }
-
-  /* ─── FORMATS TABLE ───────────────────────────── */
-  .formats-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 3rem;
-    font-size: 0.85rem;
-  }
-
-  .formats-table th {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mid-gray);
-    text-align: left;
-    padding: 0.8rem 1rem;
-    border-bottom: 2px solid var(--ink);
-    background: transparent;
-  }
-
-  .formats-table td {
-    padding: 1rem 1rem;
-    border-bottom: 1px solid var(--light-rule);
-    vertical-align: top;
-    line-height: 1.5;
-  }
-
-  .formats-table tr:hover td { background: rgba(0,0,0,0.02); }
-
-  .format-name {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--rai-blue);
-  }
-
-  .badge {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.18rem 0.5rem;
-    border-radius: 0;
-    font-weight: 500;
-  }
-
-  .badge-new { background: var(--rai-blue); color: white; }
-  .badge-adapt { background: var(--accent-gold); color: var(--ink); }
-  .badge-collab { background: rgba(208,2,27,0.1); color: var(--rai-red); border: 1px solid var(--rai-red); }
-
-  /* ─── KPI SECTION ─────────────────────────────── */
-  .kpi-block {
-    background: var(--ink);
-    color: white;
-    padding: 3.5rem 3rem;
-    margin: 0 -3rem;
-    margin-bottom: 3rem;
-  }
-
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
-  .kpi-item {
-    border-top: 1px solid rgba(255,255,255,0.12);
-    padding-top: 1.2rem;
-  }
-
-  .kpi-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    font-weight: 900;
-    color: var(--accent-gold);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.4rem;
-  }
-
-  .kpi-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .kpi-note {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.5;
-  }
-
-  /* ─── ROADMAP ─────────────────────────────────── */
-  .roadmap {
-    position: relative;
-    margin-bottom: 3rem;
-  }
-
-  .roadmap::before {
-    content: '';
-    position: absolute;
-    left: 60px;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: var(--light-rule);
-  }
-
-  .roadmap-phase {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 0;
-    margin-bottom: 2.5rem;
-  }
-
-  .phase-marker {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 0.3rem;
-    padding-right: 1.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .phase-dot {
-    width: 12px;
-    height: 12px;
-    background: var(--rai-blue);
-    border: 2px solid var(--paper);
-    box-shadow: 0 0 0 1px var(--rai-blue);
-    flex-shrink: 0;
-  }
-
-  .roadmap-phase.q1 .phase-dot { background: var(--accent-gold); box-shadow: 0 0 0 1px var(--accent-gold); }
-  .roadmap-phase.q2 .phase-dot { background: var(--rai-blue); }
-  .roadmap-phase.q3 .phase-dot { background: #2D6A4F; box-shadow: 0 0 0 1px #2D6A4F; }
-  .roadmap-phase.q4 .phase-dot { background: var(--rai-red); box-shadow: 0 0 0 1px var(--rai-red); }
-
-  .phase-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    color: var(--mid-gray);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    writing-mode: vertical-rl;
-    margin-top: 0.5rem;
-  }
-
-  .phase-content {
-    padding-left: 1.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .phase-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-    line-height: 1.2;
-  }
-
-  .phase-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--mid-gray);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-  }
-
-  .phase-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .phase-tag {
-    font-size: 0.78rem;
-    padding: 0.25rem 0.7rem;
-    background: rgba(0,0,0,0.04);
-    border: 1px solid var(--light-rule);
-    color: #444;
-    line-height: 1.4;
-  }
-
-  /* ─── CLOSING ─────────────────────────────────── */
-  .closing {
-    background: var(--rai-blue);
-    color: white;
-    padding: 5rem 3rem;
-    text-align: center;
-  }
-
-  .closing-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 1.5rem;
-  }
-
-  .closing-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.5rem, 4vw, 2.6rem);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.35;
-    color: white;
-    max-width: 720px;
-    margin: 0 auto 1.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .closing-attribution {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .closing-divider {
-    width: 40px;
-    height: 1px;
-    background: rgba(255,255,255,0.2);
-    margin: 2.5rem auto;
-  }
-
-  .closing-team {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.8;
-  }
-
-  /* ─── NAV ─────────────────────────────────────── */
-  .nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(10,10,15,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding: 0 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 52px;
-    transform: translateY(-100%);
-    transition: transform 0.4s ease;
-  }
-
-  .nav.visible { transform: translateY(0); }
-
-  .nav-brand {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.3);
-    text-decoration: none;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: rgba(255,255,255,0.8); }
-
-  /* ─── QUOTE BOX ───────────────────────────────── */
-  .quote-box {
-    border-left: 3px solid var(--accent-gold);
-    padding: 1.5rem 2rem;
-    background: rgba(200,168,75,0.04);
-    margin: 2rem 0;
-  }
-
-  .quote-box p {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
-  .quote-box cite {
-    display: block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--mid-gray);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.8rem;
-    font-style: normal;
-  }
-
-  /* ─── ANIMATIONS ──────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes slideRight {
-    from { left: -100%; }
-    to { left: 100%; }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .delay-1 { transition-delay: 0.1s; }
-  .delay-2 { transition-delay: 0.2s; }
-  .delay-3 { transition-delay: 0.3s; }
-  .delay-4 { transition-delay: 0.4s; }
-  .delay-5 { transition-delay: 0.5s; }
-
-  /* ─── MISC ────────────────────────────────────── */
-  .two-col {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  @media (max-width: 750px) {
-    .two-col { grid-template-columns: 1fr; gap: 2rem; }
-    .kpi-block { margin: 0 -1.5rem; padding: 2.5rem 1.5rem; }
-    .nav-links { display: none; }
-  }
-
-  .sidebar-block {
-    background: var(--warm-white);
-    border: 1px solid var(--light-rule);
-    padding: 1.8rem;
-  }
-
-  .sidebar-block h4 {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--mid-gray);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 1px solid var(--light-rule);
-  }
-
-  .sidebar-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.55rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-    font-size: 0.82rem;
-  }
-
-  .sidebar-item:last-child { border-bottom: none; }
-
-  .sidebar-val {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: var(--rai-blue);
-    font-size: 0.9rem;
-  }
-
-  hr.mini { border: none; border-top: 1px solid var(--light-rule); margin: 2.5rem 0; }
-
-  /* ─── DARK SECTION ────────────────────────────── */
-  .dark-section {
-    background: #0F1218;
-    padding: 5rem 3rem;
-    margin: 0;
-  }
-
-  .dark-section .section {
-    padding: 0;
-    color: white;
-  }
-
-  .dark-section .section-title { color: white; }
-  .dark-section .section-intro { color: rgba(255,255,255,0.45); }
-  .dark-section .pillar { background: rgba(255,255,255,0.03); }
-  .dark-section .pillar:hover { background: rgba(255,255,255,0.06); }
-  .dark-section .pillar-title { color: white; }
-  .dark-section .pillar-body { color: rgba(255,255,255,0.45); }
-  .dark-section .pillar-actions li { color: rgba(255,255,255,0.65); }
-  .dark-section .pillar-actions { border-top-color: rgba(255,255,255,0.08); }
-  .dark-section .pillars { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.06); }
-
-  /* ─── PRINT NOTE ──────────────────────────────── */
-  .print-footer {
-    padding: 2rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--light-rule);
-  }
-
-  .print-footer span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: rgba(0,0,0,0.25);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+:root {
+  --rai-blue: #020A17;
+  --rai-blue-neon: #0E49B5;
+  --rai-red: #D00B27;
+  --rai-red-neon: #FF2E4C;
+  --accent-gold: #C5A059;
+  --paper: #FAF8F5;
+  --warm-white: #FAF8F5;
+  --ink: #111318;
+  --dark-bg: #0A0C10;
+  --muted: #4E535F;
+  --line-light: rgba(0, 0, 0, 0.04);
+  --line-dark: rgba(255, 255, 255, 0.04);
+  --glass-dark: rgba(10, 12, 16, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --radius-card: 3px;
+  --z-base: 1;
+  --z-overlay: 10;
+  --z-nav: 50;
+  --z-modal: 100;
+  --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fluid: all 1.2s var(--ease-fluid);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Libre Franklin', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 700px at 80% -20%, rgba(14, 73, 181, 0.1), transparent 60%),
+    radial-gradient(700px 420px at 15% 8%, rgba(208, 11, 39, 0.07), transparent 60%),
+    var(--paper);
+  line-height: 1.7;
+  letter-spacing: 0.005em;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-base);
+  background-image:
+    linear-gradient(to right, rgba(17, 19, 24, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 19, 24, 0.02) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.6;
+}
+
+.app { position: relative; z-index: var(--z-overlay); }
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: var(--z-nav);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-110%);
+  transition: var(--transition-fluid);
+  background: rgba(250, 248, 245, 0.75);
+  border-bottom: 1px solid var(--line-light);
+  backdrop-filter: blur(24px) saturate(155%);
+}
+.nav.visible { transform: translateY(0); }
+.nav.nav-dark {
+  background: rgba(250, 248, 245, 0.75);
+  color: var(--ink);
+  border-bottom-color: var(--line-light);
+}
+.nav.nav-light {
+  background: var(--glass-dark);
+  color: var(--warm-white);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(30px) saturate(180%);
+}
+
+.nav-brand {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.95;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: var(--transition-fluid);
+  color: currentColor;
+  opacity: 0.65;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  opacity: 1;
+  text-shadow: 0 0 18px rgba(14, 73, 181, 0.35);
+}
+
+.section-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 5.2rem 2.4rem;
+}
+
+.cover {
+  min-height: 100svh;
+  color: var(--warm-white);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 560px at 85% -8%, rgba(14, 73, 181, 0.34), transparent 60%),
+    radial-gradient(850px 450px at 12% 120%, rgba(255, 46, 76, 0.2), transparent 64%),
+    linear-gradient(180deg, #06090f 0%, #0A0C10 100%);
+}
+
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 72px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 72px);
+  pointer-events: none;
+}
+
+.cover-top,
+.cover-bottom {
+  padding: 2.2rem 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-color: var(--line-dark);
+}
+.cover-top { border-bottom: 1px solid var(--line-dark); }
+.cover-bottom { border-top: 1px solid var(--line-dark); }
+
+.rai-logo { display: flex; align-items: center; gap: 0.95rem; }
+
+.rai-badge {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, var(--rai-blue-neon), #0a2d73);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  box-shadow: 0 0 35px rgba(14, 73, 181, 0.35);
+}
+
+.rai-label,
+.cover-meta,
+.team-tag,
+.scroll-cue {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: rgba(250, 248, 245, 0.6);
+}
+.cover-meta { text-align: right; }
+.team-tag strong { color: rgba(250, 248, 245, 0.95); font-weight: 500; }
+
+.cover-body {
+  padding: 4.2rem 2.4rem;
+  display: grid;
+  align-content: center;
+  gap: 2rem;
+  perspective: 1300px;
+}
+
+.cover-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rai-red-neon);
+}
+
+.cover-title {
+  margin: 0;
+  max-width: 980px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 8vw + 1rem, 7.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "ss01", "ss02", "kern";
+  text-wrap: balance;
+  will-change: transform;
+}
+
+.cover-title em {
+  font-style: italic;
+  color: var(--accent-gold);
+  text-shadow: 0 0 26px rgba(197, 160, 89, 0.35);
+}
+
+.cover-subtitle {
+  margin: 0;
+  max-width: 660px;
+  font-size: 1.02rem;
+  color: rgba(250, 248, 245, 0.72);
+  font-weight: 300;
+  will-change: transform;
+}
+
+.scroll-cue { display: inline-flex; align-items: center; gap: 0.7rem; }
+
+.scroll-line {
+  width: 46px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  left: -40%;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  filter: blur(2px);
+  animation: laserPulse 1s linear infinite;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rai-red);
+}
+
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.section-title {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.3rem, 4.2vw + 0.6rem, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "ss01", "ss02", "kern";
+  text-wrap: balance;
+}
+
+.section-intro {
+  margin: 1.2rem 0 2.6rem;
+  max-width: 740px;
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.scenario-shell,
+.formats-shell,
+.roadmap-shell {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.4));
+}
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 1.2rem;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(205px, auto);
+  gap: 1px;
+  background: var(--line-light);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  margin-bottom: 2.2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.7rem;
+  position: relative;
+  transition: var(--transition-fluid);
+  border-radius: var(--radius-card);
+  transform-style: preserve-3d;
+}
+
+.stat-card:nth-child(1) { grid-column: span 2; }
+.stat-card:nth-child(4) { grid-column: span 2; }
+
+.stat-card::before,
+.pillar::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transition: var(--transition-fluid);
+}
+
+.stat-card:hover,
+.pillar:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 28px 55px rgba(14, 73, 181, 0.22), 0 0 42px rgba(255, 46, 76, 0.16);
+}
+
+.stat-card:hover::before,
+.pillar:hover::before { border-color: rgba(14, 73, 181, 0.35); }
+
+.stat-card.accent {
+  background: linear-gradient(175deg, #0d1321, #0A0C10);
+  color: var(--warm-white);
+}
+
+.stat-label {
+  margin-bottom: 0.55rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.61rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #5d6270;
+}
+
+.stat-card.accent .stat-label { color: rgba(250, 248, 245, 0.58); }
+
+.stat-number {
+  margin: 0 0 0.52rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 2.8vw + 1.2rem, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--rai-blue-neon);
+}
+
+.stat-card.accent .stat-number { color: var(--accent-gold); }
+
+.stat-desc { margin: 0; font-size: 0.86rem; color: #4e535f; }
+.stat-card.accent .stat-desc { color: rgba(250, 248, 245, 0.68); }
+
+.quote-box {
+  margin: 0 0 1.5rem;
+  padding: 1.4rem 1.6rem;
+  border-left: 2px solid var(--accent-gold);
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.12), rgba(197, 160, 89, 0.04));
+}
+
+.quote-box p {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.14rem;
+  line-height: 1.52;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.quote-box cite {
+  display: block;
+  margin-top: 0.8rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #646a78;
+  font-style: normal;
+}
+
+.diagnosis-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.diagnosis-col {
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.82);
+  padding: 1.3rem;
+}
+
+.diagnosis-col h3 {
+  margin: 0 0 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.14rem;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.diagnosis-col.threat h3 { color: var(--rai-red); border-bottom-color: rgba(208, 11, 39, 0.3); }
+.diagnosis-col.opp h3 { color: var(--rai-blue-neon); border-bottom-color: rgba(14, 73, 181, 0.3); }
+
+.diagnosis-item {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+
+.diagnosis-item:last-child { margin-bottom: 0; }
+
+.d-icon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  border-radius: 3px;
+}
+
+.threat .d-icon {
+  color: var(--rai-red);
+  border: 1px solid rgba(208, 11, 39, 0.35);
+  background: rgba(208, 11, 39, 0.07);
+}
+
+.opp .d-icon {
+  color: var(--rai-blue-neon);
+  border: 1px solid rgba(14, 73, 181, 0.35);
+  background: rgba(14, 73, 181, 0.08);
+}
+
+.d-text { font-size: 0.86rem; color: #2f3440; line-height: 1.53; }
+
+.sidebar-stack { display: grid; align-content: start; gap: 1rem; }
+
+.sidebar-block {
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.84);
+  padding: 1.2rem;
+}
+
+.sidebar-block h4 {
+  margin: 0 0 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #636977;
+  border-bottom: 1px solid var(--line-light);
+  padding-bottom: 0.66rem;
+}
+
+.sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.58rem 0;
+  border-bottom: 1px solid var(--line-light);
+  font-size: 0.84rem;
+}
+.sidebar-item:last-child { border-bottom: 0; }
+
+.sidebar-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--rai-blue-neon);
+  letter-spacing: -0.02em;
+}
+
+.dark-section {
+  background:
+    radial-gradient(950px 560px at 90% 0%, rgba(14, 73, 181, 0.2), transparent 58%),
+    radial-gradient(780px 520px at -2% 120%, rgba(255, 46, 76, 0.14), transparent 60%),
+    var(--dark-bg);
+  color: var(--warm-white);
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.dark-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 16, 0.5);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.dark-section .section-wrap { position: relative; z-index: var(--z-overlay); }
+.dark-section .section-title { color: var(--warm-white); }
+.dark-section .section-intro { color: rgba(250, 248, 245, 0.68); }
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: minmax(280px, auto);
+  gap: 1px;
+  background: var(--line-dark);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.pillar {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.9rem 1.5rem;
+  transition: var(--transition-fluid);
+  border-radius: var(--radius-card);
+}
+
+.pillar:nth-child(1) { grid-column: span 2; }
+.pillar:nth-child(3) { grid-column: span 3; }
+
+.pillar-num {
+  margin: 0 0 0.35rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 4vw + 1rem, 4.3rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  color: rgba(250, 248, 245, 0.14);
+}
+
+.pillar-tag {
+  margin: 0 0 0.55rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rai-red-neon);
+}
+
+.pillar-title {
+  margin: 0 0 0.95rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2vw + 0.4rem, 2.05rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--warm-white);
+}
+
+.pillar-body { margin: 0 0 1.2rem; font-size: 0.87rem; color: rgba(250, 248, 245, 0.72); }
+
+.pillar-actions {
+  margin: 0;
+  padding: 1rem 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line-dark);
+  display: grid;
+  gap: 0.48rem;
+}
+
+.pillar-actions li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.81rem;
+  color: rgba(250, 248, 245, 0.86);
+}
+
+.pillar-actions li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+}
+
+.formats-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+  font-size: 0.84rem;
+}
+
+.formats-table th,
+.formats-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1rem 0.9rem;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.formats-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #676d7b;
+}
+
+.formats-table tbody tr { transition: var(--transition-fluid); }
+.formats-table tbody tr:hover { background: rgba(14, 73, 181, 0.03); }
+
+.format-name {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--rai-blue-neon);
+  letter-spacing: -0.02em;
+}
+
+.format-desc { margin-top: 0.32rem; font-size: 0.8rem; color: #5e6472; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.22rem 0.54rem;
+  border-radius: 999px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid;
+  line-height: 1.2;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.badge-new {
+  color: var(--rai-blue-neon);
+  border-color: rgba(14, 73, 181, 0.55);
+  box-shadow: 0 0 16px rgba(14, 73, 181, 0.22) inset, 0 0 22px rgba(14, 73, 181, 0.15);
+}
+
+.badge-adapt {
+  color: #6d5317;
+  border-color: rgba(197, 160, 89, 0.7);
+  box-shadow: 0 0 16px rgba(197, 160, 89, 0.16) inset;
+  background: rgba(197, 160, 89, 0.14);
+}
+
+.badge-collab {
+  color: var(--rai-red);
+  border-color: rgba(255, 46, 76, 0.66);
+  box-shadow: 0 0 16px rgba(255, 46, 76, 0.16) inset;
+  background: rgba(255, 46, 76, 0.12);
+}
+
+.kpi-shell {
+  background:
+    radial-gradient(1000px 560px at 85% -30%, rgba(14, 73, 181, 0.28), transparent 60%),
+    linear-gradient(180deg, #0B1018 0%, #0A0C10 100%);
+  color: var(--warm-white);
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.kpi-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 16, 0.5);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.kpi-shell .section-wrap { position: relative; z-index: var(--z-overlay); }
+
+.kpi-grid {
+  margin-top: 1.7rem;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.kpi-item {
+  padding: 1rem;
+  border-top: 1px solid var(--line-dark);
+  background: rgba(255, 255, 255, 0.02);
+  transition: var(--transition-fluid);
+  border-radius: var(--radius-card);
+}
+
+.kpi-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 48px rgba(14, 73, 181, 0.24), 0 0 36px rgba(255, 46, 76, 0.16);
+}
+
+.kpi-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 245, 0.54);
+  margin-bottom: 0.4rem;
+}
+
+.kpi-value {
+  margin: 0 0 0.42rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 2.8vw + 0.2rem, 2.9rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent-gold);
+}
+
+.kpi-note { margin: 0; font-size: 0.78rem; color: rgba(250, 248, 245, 0.66); }
+
+.roadmap-line { position: relative; margin-top: 0.8rem; }
+.roadmap-line::before {
+  content: "";
+  position: absolute;
+  left: 58px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-light);
+}
+
+.roadmap-phase {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 0;
+  margin-bottom: 1.5rem;
+}
+
+.phase-marker {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  padding-top: 0.25rem;
+  z-index: 2;
+}
+
+.phase-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px;
+  border: 2px solid var(--paper);
+}
+
+.q1 .phase-dot { background: var(--accent-gold); box-shadow: 0 0 0 1px var(--accent-gold); }
+.q2 .phase-dot { background: var(--rai-blue-neon); box-shadow: 0 0 0 1px var(--rai-blue-neon); }
+.q3 .phase-dot { background: #2D6A4F; box-shadow: 0 0 0 1px #2D6A4F; }
+.q4 .phase-dot { background: var(--rai-red); box-shadow: 0 0 0 1px var(--rai-red); }
+
+.phase-label {
+  writing-mode: vertical-rl;
+  margin-top: 0.42rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.53rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a808e;
+}
+
+.phase-content {
+  padding: 0 0 0.2rem 1.4rem;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.phase-period {
+  margin: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.59rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6f7583;
+}
+
+.phase-title {
+  margin: 0.45rem 0 0.72rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.18rem;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.phase-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding-bottom: 1rem;
+}
+
+.phase-tag {
+  padding: 0.23rem 0.68rem;
+  border: 1px solid var(--line-light);
+  background: rgba(255, 255, 255, 0.65);
+  font-size: 0.78rem;
+  color: #393f4b;
+}
+
+.investment-grid {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.investment-card {
+  border: 1px solid var(--line-light);
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: var(--radius-card);
+  padding: 0.9rem;
+}
+
+.investment-title {
+  margin: 0 0 0.32rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7b818f;
+}
+
+.investment-value {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.36rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--rai-blue-neon);
+}
+
+.investment-note { margin: 0.9rem 0 0; font-size: 0.8rem; color: #5f6674; }
+
+.closing {
+  text-align: center;
+  color: var(--warm-white);
+  background:
+    radial-gradient(900px 400px at 85% 0%, rgba(255, 255, 255, 0.15), transparent 62%),
+    linear-gradient(180deg, #0E2E70, #081b45);
+  padding: 4.9rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closing-eyebrow,
+.closing-attribution {
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.6rem;
+  color: rgba(250, 248, 245, 0.6);
+}
+
+.closing-quote {
+  margin: 1.2rem auto 1.4rem;
+  max-width: 900px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3.8vw + 0.2rem, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  font-style: italic;
+}
+
+.closing-divider {
+  width: 44px;
+  height: 1px;
+  margin: 2rem auto;
+  background: rgba(250, 248, 245, 0.25);
+}
+
+.closing-team {
+  font-size: 0.84rem;
+  color: rgba(250, 248, 245, 0.78);
+  line-height: 1.74;
+}
+
+.print-footer {
+  padding: 1.3rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  border-top: 1px solid var(--line-light);
+  background: rgba(255, 255, 255, 0.84);
+}
+
+.print-footer span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(17, 19, 24, 0.45);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) rotateX(12deg) scale(0.96);
+  filter: blur(10px);
+  transition: var(--transition-fluid);
+  transform-origin: center top;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg) scale(1);
+  filter: blur(0px);
+}
+
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.4s; }
+
+[data-parallax] { will-change: transform; transition: transform 0.1s linear; }
+
+@keyframes laserPulse {
+  0% { left: -50%; opacity: 0; }
+  20% { opacity: 1; }
+  100% { left: 115%; opacity: 0; }
+}
+
+@media (max-width: 1100px) {
+  .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pillar:nth-child(1), .pillar:nth-child(3), .stat-card:nth-child(1), .stat-card:nth-child(4) { grid-column: span 1; }
+  .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .investment-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 4rem 1rem; }
+  .cover-top, .cover-body, .cover-bottom { padding-left: 1rem; padding-right: 1rem; }
+  .diagnosis-grid, .pillars, .stat-grid, .kpi-grid, .investment-grid { grid-template-columns: 1fr; }
+  .formats-table { display: block; overflow-x: auto; }
+  .print-footer { flex-direction: column; align-items: flex-start; }
+}
 </style>
 </head>
 <body>
+<div class="app">
+  <nav class="nav nav-dark" id="mainNav">
+    <span class="nav-brand">RAI — Marketing &amp; Sviluppo · Business Game 2026</span>
+    <ul class="nav-links">
+      <li><a href="#scenario">Scenario</a></li>
+      <li><a href="#strategia">Strategia</a></li>
+      <li><a href="#formati">Formati</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#kpi">KPI</a></li>
+    </ul>
+  </nav>
 
-<!-- NAV -->
-<nav class="nav" id="mainNav">
-  <span class="nav-brand">RAI — Marketing &amp; Sviluppo · Business Game 2026</span>
-  <ul class="nav-links">
-    <li><a href="#scenario">Scenario</a></li>
-    <li><a href="#strategia">Strategia</a></li>
-    <li><a href="#formati">Formati</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#kpi">KPI</a></li>
-  </ul>
-</nav>
+  <section class="cover" id="cover" data-theme="dark">
+    <div class="cover-top reveal in-view">
+      <div class="rai-logo">
+        <div class="rai-badge">RAI</div>
+        <div class="rai-label">Radiotelevisione<br>Italiana</div>
+      </div>
+      <div class="cover-meta">
+        Business Game · SAA School of Management<br>
+        26 Maggio 2026 · ore 9:15
+      </div>
+    </div>
 
-<!-- COVER -->
-<section class="cover">
-  <div class="cover-top">
-    <div class="rai-logo">
-      <div class="rai-badge">RAI</div>
-      <div class="rai-label">Radiotelevisione<br>Italiana</div>
+    <div class="cover-body">
+      <div class="cover-eyebrow reveal in-view">Team Marketing e Sviluppo — Documento Strategico</div>
+      <h1 class="cover-title reveal in-view" data-parallax data-speed="0.2">
+        Evoluzione dei<br>
+        <em>modelli di fruizione</em><br>
+        e rilancio del pubblico RAI
+      </h1>
+      <p class="cover-subtitle reveal in-view" data-parallax data-speed="0.1">
+        Un'analisi strutturata del mercato media italiano, delle dinamiche di frammentazione
+        dell'audience e di una roadmap operativa per riposizionare il servizio pubblico
+        come ecosistema culturale rilevante per le nuove generazioni.
+      </p>
     </div>
-    <div class="cover-meta">
-      Business Game · SAA School of Management<br>
-      26 Maggio 2026 · ore 9:15
-    </div>
-  </div>
 
-  <div class="cover-body">
-    <div class="cover-eyebrow">Team Marketing e Sviluppo — Documento Strategico</div>
-    <h1 class="cover-title">
-      Evoluzione dei<br>
-      <em>modelli di fruizione</em><br>
-      e rilancio del pubblico RAI
-    </h1>
-    <p class="cover-subtitle">
-      Un'analisi strutturata del mercato media italiano, delle dinamiche di frammentazione 
-      dell'audience e di una roadmap operativa per riposizionare il servizio pubblico 
-      come ecosistema culturale rilevante per le nuove generazioni.
-    </p>
-  </div>
+    <div class="cover-bottom reveal in-view">
+      <div class="team-tag">Progetto <strong>"Evoluzione dei Modelli di Fruizione"</strong></div>
+      <div class="scroll-cue"><span class="scroll-line"></span>Scorri per leggere</div>
+    </div>
+  </section>
 
-  <div class="cover-bottom">
-    <div class="team-tag">Progetto <strong>"Evoluzione dei Modelli di Fruizione"</strong></div>
-    <div class="scroll-cue">
-      <span class="scroll-line"></span>
-      Scorri per leggere
-    </div>
-  </div>
-</section>
+  <section class="scenario-shell" id="scenario" data-theme="light" data-parallax data-speed="0.03">
+    <div class="section-wrap">
+      <div class="section-label reveal">01 · Analisi di contesto</div>
+      <h2 class="section-title reveal delay-1">Il mercato si è già<br>frammentato.</h2>
+      <p class="section-intro reveal delay-2">
+        La sfida della RAI non è tecnologica: è culturale. Il pubblico giovane non ha abbandonato i contenuti di qualità — ha abbandonato la televisione lineare. Ecco i numeri che definiscono il campo di gioco.
+      </p>
 
-<!-- SECTION 1: SCENARIO -->
-<div id="scenario">
-<div class="section">
-  <div class="section-label reveal">01 · Analisi di contesto</div>
-  <h2 class="section-title reveal delay-1">Il mercato si è già<br>frammentato.</h2>
-  <p class="section-intro reveal delay-2">
-    La sfida della RAI non è tecnologica: è culturale. Il pubblico giovane non ha abbandonato i contenuti di qualità — ha abbandonato la televisione lineare. Ecco i numeri che definiscono il campo di gioco.
-  </p>
+      <div class="stat-grid reveal delay-2">
+        <article class="stat-card" data-counter-group="stat">
+          <div class="stat-label">Età media telespettatore RAI</div>
+          <h3 class="stat-number"><span class="count-up" data-target="65" data-duration="2200" data-decimals="0" data-prefix="" data-suffix="+">0+</span></h3>
+          <p class="stat-desc">La RAI parla quasi esclusivamente a over 60. Il pubblico sotto i 40 è quasi invisibile nella composizione dell'audience televisiva lineare.</p>
+        </article>
 
-  <div class="stat-grid reveal delay-2">
-    <div class="stat-card">
-      <div class="stat-label">Età media telespettatore RAI</div>
-      <div class="stat-number">65<span class="stat-unit">+</span></div>
-      <div class="stat-desc">La RAI parla quasi esclusivamente a over 60. Il pubblico sotto i 40 è quasi invisibile nella composizione dell'audience televisiva lineare.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Penetrazione OTT in Italia</div>
-      <div class="stat-number">62<span class="stat-unit">%</span></div>
-      <div class="stat-desc">Oltre 6 italiani su 10 utilizzano almeno un servizio streaming a pagamento. Netflix, Prime Video e Disney+ hanno ridefinito le aspettative narrative.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Tempo medio su social · 18–34</div>
-      <div class="stat-number">3.2<span class="stat-unit">h</span></div>
-      <div class="stat-desc">I giovani consumano più contenuti video su TikTok, YouTube e Instagram di quanti ne vedano in TV lineare. Il formato breve ha vinto.</div>
-    </div>
-    <div class="stat-card accent">
-      <div class="stat-label">Potenziale audience recuperabile</div>
-      <div class="stat-number">8<span class="stat-unit">M</span></div>
-      <div class="stat-desc">Utenti 25–40 anni attivi su piattaforme digitali, potenzialmente raggiungibili con un'offerta RAI riformulata in chiave cross-platform.</div>
-    </div>
-  </div>
+        <article class="stat-card" data-counter-group="stat">
+          <div class="stat-label">Penetrazione OTT in Italia</div>
+          <h3 class="stat-number"><span class="count-up" data-target="62" data-duration="2200" data-decimals="0" data-prefix="" data-suffix="%">0%</span></h3>
+          <p class="stat-desc">Oltre 6 italiani su 10 utilizzano almeno un servizio streaming a pagamento. Netflix, Prime Video e Disney+ hanno ridefinito le aspettative narrative.</p>
+        </article>
 
-  <div class="two-col">
-    <div>
-      <div class="quote-box reveal">
-        <p>"Il servizio pubblico non può permettersi di essere irrilevante per metà della popolazione. La missione di informare, educare e intrattenere vale ancora — ma deve trovare nuovi linguaggi."</p>
-        <cite>Framework di riferimento · Analisi team M&amp;S</cite>
+        <article class="stat-card" data-counter-group="stat">
+          <div class="stat-label">Tempo medio su social · 18–34</div>
+          <h3 class="stat-number"><span class="count-up" data-target="3.2" data-duration="2200" data-decimals="1" data-prefix="" data-suffix="h">0.0h</span></h3>
+          <p class="stat-desc">I giovani consumano più contenuti video su TikTok, YouTube e Instagram di quanti ne vedano in TV lineare. Il formato breve ha vinto.</p>
+        </article>
+
+        <article class="stat-card accent" data-counter-group="stat">
+          <div class="stat-label">Potenziale audience recuperabile</div>
+          <h3 class="stat-number"><span class="count-up" data-target="8" data-duration="2200" data-decimals="0" data-prefix="" data-suffix="M">0M</span></h3>
+          <p class="stat-desc">Utenti 25–40 anni attivi su piattaforme digitali, potenzialmente raggiungibili con un'offerta RAI riformulata in chiave cross-platform.</p>
+        </article>
       </div>
 
-      <div class="diagnosis-grid reveal delay-2">
-        <div class="diagnosis-col threat">
-          <h3>Minacce strutturali</h3>
-          <div class="diagnosis-item">
-            <div class="d-icon">T1</div>
-            <div class="d-text">Loss of relevance: il brand RAI è percepito come datato dai 18–34enni, associato a contenuti per anziani</div>
-          </div>
-          <div class="diagnosis-item">
-            <div class="d-icon">T2</div>
-            <div class="d-text">Algoritmi OTT che creano abitudini personalizzate impossibili da replicare con palinsesti fissi</div>
-          </div>
-          <div class="diagnosis-item">
-            <div class="d-icon">T3</div>
-            <div class="d-text">Talenti editoriali e creativi attratti da produzioni internazionali con budget e libertà maggiori</div>
-          </div>
-          <div class="diagnosis-item">
-            <div class="d-icon">T4</div>
-            <div class="d-text">Canone percepito come "tassa invisibile" senza valore percepito dai giovani contribuenti</div>
+      <div class="scenario-grid">
+        <div>
+          <blockquote class="quote-box reveal delay-1">
+            <p>"Il servizio pubblico non può permettersi di essere irrilevante per metà della popolazione. La missione di informare, educare e intrattenere vale ancora — ma deve trovare nuovi linguaggi."</p>
+            <cite>Framework di riferimento · Analisi team M&amp;S</cite>
+          </blockquote>
+
+          <div class="diagnosis-grid reveal delay-2">
+            <article class="diagnosis-col threat">
+              <h3>Minacce strutturali</h3>
+              <div class="diagnosis-item"><div class="d-icon">T1</div><div class="d-text">Loss of relevance: il brand RAI è percepito come datato dai 18–34enni, associato a contenuti per anziani</div></div>
+              <div class="diagnosis-item"><div class="d-icon">T2</div><div class="d-text">Algoritmi OTT che creano abitudini personalizzate impossibili da replicare con palinsesti fissi</div></div>
+              <div class="diagnosis-item"><div class="d-icon">T3</div><div class="d-text">Talenti editoriali e creativi attratti da produzioni internazionali con budget e libertà maggiori</div></div>
+              <div class="diagnosis-item"><div class="d-icon">T4</div><div class="d-text">Canone percepito come "tassa invisibile" senza valore percepito dai giovani contribuenti</div></div>
+            </article>
+
+            <article class="diagnosis-col opp">
+              <h3>Opportunità reali</h3>
+              <div class="diagnosis-item"><div class="d-icon">O1</div><div class="d-text">Trust brand unico: la RAI ha credibilità istituzionale che nessun OTT privato può replicare</div></div>
+              <div class="diagnosis-item"><div class="d-icon">O2</div><div class="d-text">Archivio storico di contenuti culturali di valore inestimabile, sottoutilizzato digitalmente</div></div>
+              <div class="diagnosis-item"><div class="d-icon">O3</div><div class="d-text">RaiPlay come infrastruttura esistente da potenziare, senza costruire da zero</div></div>
+              <div class="diagnosis-item"><div class="d-icon">O4</div><div class="d-text">Produzione italiana di qualità con domanda crescente sia domestica che internazionale</div></div>
+            </article>
           </div>
         </div>
-        <div class="diagnosis-col opp">
-          <h3>Opportunità reali</h3>
-          <div class="diagnosis-item">
-            <div class="d-icon">O1</div>
-            <div class="d-text">Trust brand unico: la RAI ha credibilità istituzionale che nessun OTT privato può replicare</div>
+
+        <aside class="sidebar-stack reveal delay-3">
+          <div class="sidebar-block">
+            <h4>Benchmark europeo</h4>
+            <div class="sidebar-item"><span>BBC iPlayer</span><span class="sidebar-val">36% U-35</span></div>
+            <div class="sidebar-item"><span>ARD Mediathek</span><span class="sidebar-val">28% U-35</span></div>
+            <div class="sidebar-item"><span>France Télévisions</span><span class="sidebar-val">24% U-35</span></div>
+            <div class="sidebar-item"><span>RaiPlay (attuale)</span><span class="sidebar-val">11% U-35</span></div>
           </div>
-          <div class="diagnosis-item">
-            <div class="d-icon">O2</div>
-            <div class="d-text">Archivio storico di contenuti culturali di valore inestimabile, sottoutilizzato digitalmente</div>
+          <div class="sidebar-block">
+            <h4>Diagnosi sintetica</h4>
+            <p style="margin:0;font-size:0.83rem;color:#535967;line-height:1.6;">La distanza tra RAI e benchmark europei non è tecnica: la BBC ha investito in storytelling digitale nativo, formati corti nativi, community online. Il divario è recuperabile in 18–24 mesi con scelte editoriali coraggiose.</p>
           </div>
-          <div class="diagnosis-item">
-            <div class="d-icon">O3</div>
-            <div class="d-text">RaiPlay come infrastruttura esistente da potenziare, senza costruire da zero</div>
-          </div>
-          <div class="diagnosis-item">
-            <div class="d-icon">O4</div>
-            <div class="d-text">Produzione italiana di qualità con domanda crescente sia domestica che internazionale</div>
-          </div>
-        </div>
+        </aside>
       </div>
     </div>
+  </section>
 
-    <div class="reveal delay-3">
-      <div class="sidebar-block">
-        <h4>Benchmark europeo</h4>
-        <div class="sidebar-item">
-          <span>BBC iPlayer</span>
-          <span class="sidebar-val">36% U-35</span>
-        </div>
-        <div class="sidebar-item">
-          <span>ARD Mediathek</span>
-          <span class="sidebar-val">28% U-35</span>
-        </div>
-        <div class="sidebar-item">
-          <span>France Télévisions</span>
-          <span class="sidebar-val">24% U-35</span>
-        </div>
-        <div class="sidebar-item">
-          <span>RaiPlay (attuale)</span>
-          <span class="sidebar-val">11% U-35</span>
-        </div>
-      </div>
+  <section class="dark-section" id="strategia" data-theme="dark" data-parallax data-speed="0.04">
+    <div class="section-wrap">
+      <div class="section-label reveal" style="color:#FF2E4C;">02 · Framework strategico</div>
+      <h2 class="section-title reveal delay-1">Tre pilastri.<br>Una sola direzione.</h2>
+      <p class="section-intro reveal delay-2">La strategia non si basa su un singolo intervento ma su un ecosistema integrato. Contenuto, distribuzione e community devono evolvere in parallelo.</p>
 
-      <div class="sidebar-block" style="margin-top:1rem;">
-        <h4>Diagnosi sintetica</h4>
-        <p style="font-size:0.82rem;line-height:1.6;color:#555;">
-          La distanza tra RAI e benchmark europei non è tecnica: la BBC ha investito in storytelling digitale nativo, formati corti nativi, community online. Il divario è recuperabile in 18–24 mesi con scelte editoriali coraggiose.
-        </p>
+      <div class="pillars reveal delay-2">
+        <article class="pillar">
+          <p class="pillar-num">I</p>
+          <p class="pillar-tag">Contenuto</p>
+          <h3 class="pillar-title">Innovazione Editoriale Radicale</h3>
+          <p class="pillar-body">Non è sufficiente mettere i programmi esistenti su RaiPlay. La RAI deve sviluppare formati nativi digitali, prodotti specificamente per la fruizione non lineare, con ritmi narrativi, estetica visiva e temi rilevanti per i 25–34enni.</p>
+          <ul class="pillar-actions">
+            <li>Docuseries brevi (4–6 ep × 20') su temi identitari: lavoro, casa, futuro, cultura</li>
+            <li>Late night comedy talk con ospiti dall'ecosistema creator italiano</li>
+            <li>Podcast video con distribuzione cross-platform</li>
+            <li>Laboratorio formati: 10 pilot annuali con test A/B su RaiPlay</li>
+          </ul>
+        </article>
+
+        <article class="pillar">
+          <p class="pillar-num">II</p>
+          <p class="pillar-tag">Distribuzione</p>
+          <h3 class="pillar-title">Ecosistema Cross-Platform Integrato</h3>
+          <p class="pillar-body">TV lineare, RaiPlay, TikTok, YouTube, Podcast, Social: non canali separati ma un unico flusso narrativo dove ogni contenuto è progettato per circolare. Il palinsesto diventa punto di partenza, non di arrivo.</p>
+          <ul class="pillar-actions">
+            <li>RaiPlay 2.0: UX riprogettata, raccomandazione algoritmica, profilo personale</li>
+            <li>Vertical content unit: team dedicato a TikTok e Reels per ogni show</li>
+            <li>Partnership YouTube per archivio storico e contenuti culturali</li>
+            <li>Distribution-first mindset: ogni produzione nasce già pensata per clip</li>
+          </ul>
+        </article>
+
+        <article class="pillar">
+          <p class="pillar-num">III</p>
+          <p class="pillar-tag">Community</p>
+          <h3 class="pillar-title">Partecipazione come Missione Pubblica</h3>
+          <p class="pillar-body">Il servizio pubblico ha un vantaggio competitivo unico: la legittimità culturale. Può fare quello che Netflix non può: coinvolgere, includere, abilitare la voce dei cittadini come parte del prodotto editoriale.</p>
+          <ul class="pillar-actions">
+            <li>RAI Creator Network: programma di co-produzione con creator italiani</li>
+            <li>RAI Giovani: redazione under-30 integrata nelle strutture editoriali</li>
+            <li>Crowdsourcing editoriale su temi di interesse pubblico</li>
+            <li>Live events phygital legati ai programmi di punta</li>
+          </ul>
+        </article>
       </div>
     </div>
+  </section>
+
+  <section class="formats-shell" id="formati" data-theme="light" data-parallax data-speed="0.025">
+    <div class="section-wrap">
+      <div class="section-label reveal">03 · Proposta editoriale</div>
+      <h2 class="section-title reveal delay-1">Nuovi formati per<br>nuove abitudini.</h2>
+      <p class="section-intro reveal delay-2">Cinque format concreti, progettati per raggiungere il pubblico 25–40. Alcune idee originali, alcune adattamenti intelligenti di modelli già validati all'estero.</p>
+
+      <div class="reveal delay-2">
+        <table class="formats-table">
+          <thead>
+            <tr><th>Format</th><th>Piattaforma primaria</th><th>Target</th><th>Tipo</th><th>Modello di riferimento</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="format-name">Terzo Millennio</div><div class="format-desc">Docuserie 6 ep × 22' sull'Italia che cambia: lavoro, abitare, relazioni, identità</div></td>
+              <td>RaiPlay → Rai 3</td><td>25–38</td><td><span class="badge badge-new">Originale</span></td><td>Moving Out (ABC AU), Years &amp; Years (BBC)</td>
+            </tr>
+            <tr>
+              <td><div class="format-name">Notte Italiana</div><div class="format-desc">Late night talk quotidiano, formato 35', con comedian e creator ospiti — ironia, attualità, cultura pop</div></td>
+              <td>RaiPlay first, Rai 2</td><td>22–35</td><td><span class="badge badge-new">Originale</span></td><td>Late Show, The Daily Show, Le Quotidien (FR)</td>
+            </tr>
+            <tr>
+              <td><div class="format-name">Archivio Vivo</div><div class="format-desc">Rimontaggio creativo dell'archivio RAI in chiave moderna — il passato commentato con occhi nuovi</div></td>
+              <td>YouTube + RaiPlay</td><td>20–40</td><td><span class="badge badge-adapt">Adattamento</span></td><td>Everything Is Copy (archival), INA de France</td>
+            </tr>
+            <tr>
+              <td><div class="format-name">Campo Largo</div><div class="format-desc">Debate show costruito su dati, con pubblico in studio e community online — politica senza urla</div></td>
+              <td>Rai 1 + Live streaming</td><td>28–45</td><td><span class="badge badge-adapt">Adattamento</span></td><td>Débat France 2, Hardtalk (BBC)</td>
+            </tr>
+            <tr>
+              <td><div class="format-name">RAI × Creator</div><div class="format-desc">Co-produzioni mensili con creator italiani — contenuto ibrido: qualità RAI, autenticità creator</div></td>
+              <td>TikTok + YouTube + RaiPlay</td><td>18–30</td><td><span class="badge badge-collab">Co-produzione</span></td><td>BBC Three creator collabs, France TV slash</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote class="quote-box reveal delay-3">
+        <p>"La distinzione tra innovazione tecnologica e innovazione editoriale è cruciale: nuovi canali non bastano se il contenuto rimane lo stesso. Il cambiamento deve essere narrativo, non solo distributivo."</p>
+        <cite>Posizione strategica del team · Business Game 2026</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="kpi-shell" id="kpi" data-theme="dark" data-parallax data-speed="0.03">
+    <div class="section-wrap">
+      <div class="section-label reveal" style="color:rgba(255, 46, 76, 0.85);">04 · Obiettivi misurabili</div>
+      <h2 class="section-title reveal delay-1">Target a 24 mesi.</h2>
+      <div class="kpi-grid">
+        <article class="kpi-item reveal delay-1" data-counter-group="kpi">
+          <div class="kpi-name">Audience 25–40 su RaiPlay</div>
+          <h3 class="kpi-value"><span class="count-up" data-target="120" data-duration="2200" data-decimals="0" data-prefix="+" data-suffix="%">+0%</span></h3>
+          <p class="kpi-note">Da 11% a 24% della composizione audience — avvicinamento al benchmark BBC</p>
+        </article>
+        <article class="kpi-item reveal delay-2" data-counter-group="kpi">
+          <div class="kpi-name">Download mensili RaiPlay</div>
+          <h3 class="kpi-value"><span class="count-up" data-target="5" data-duration="2200" data-decimals="0" data-prefix="" data-suffix="M">0M</span></h3>
+          <p class="kpi-note">Da ~2.1M a 5M utenti attivi mensili nell'app, con sessioni medie superiori a 22 minuti</p>
+        </article>
+        <article class="kpi-item reveal delay-3" data-counter-group="kpi">
+          <div class="kpi-name">Reach social organico</div>
+          <h3 class="kpi-value"><span class="count-up" data-target="80" data-duration="2200" data-decimals="0" data-prefix="" data-suffix="M">0M</span></h3>
+          <p class="kpi-note">Impression mensili cumulate su TikTok, YouTube e Instagram attraverso contenuti verticali nativi</p>
+        </article>
+        <article class="kpi-item reveal delay-4" data-counter-group="kpi">
+          <div class="kpi-name">Formati nuovi in produzione</div>
+          <h3 class="kpi-value"><span class="count-up" data-target="10" data-duration="2200" data-decimals="0" data-prefix="" data-suffix="">0</span></h3>
+          <p class="kpi-note">Pilot prodotti nel primo anno, con meccanismo di A/B testing e feedback community</p>
+        </article>
+        <article class="kpi-item reveal delay-5" data-counter-group="kpi">
+          <div class="kpi-name">Partner creator attivi</div>
+          <h3 class="kpi-value"><span class="count-up" data-target="25" data-duration="2200" data-decimals="0" data-prefix="" data-suffix="">0</span></h3>
+          <p class="kpi-note">Creator italiani con contratto di co-produzione attivo entro 18 mesi dall'avvio del programma</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="roadmap-shell" id="roadmap" data-theme="light" data-parallax data-speed="0.02">
+    <div class="section-wrap">
+      <div class="section-label reveal">05 · Piano operativo</div>
+      <h2 class="section-title reveal delay-1">Roadmap a 12 mesi.</h2>
+      <p class="section-intro reveal delay-2">L'esecuzione è sequenziale ma non lineare: alcune iniziative partono in parallelo. La priorità assoluta è lanciare segnali visibili entro i primi 90 giorni.</p>
+
+      <div class="roadmap-line reveal delay-2">
+        <article class="roadmap-phase q1">
+          <div class="phase-marker"><div class="phase-dot"></div><div class="phase-label">Q1</div></div>
+          <div class="phase-content"><p class="phase-period">Mesi 1–3 · Fondamenta</p><h3 class="phase-title">Setup strutturale e segnali rapidi</h3><div class="phase-items"><span class="phase-tag">Costituzione RAI Digital Lab</span><span class="phase-tag">Audit archivio storico</span><span class="phase-tag">Lancio Archivio Vivo su YouTube</span><span class="phase-tag">Selezione 5 creator partner</span><span class="phase-tag">Redesign UX RaiPlay (beta)</span><span class="phase-tag">Primo pilot RAI × Creator</span></div></div>
+        </article>
+
+        <article class="roadmap-phase q2">
+          <div class="phase-marker"><div class="phase-dot"></div><div class="phase-label">Q2</div></div>
+          <div class="phase-content"><p class="phase-period">Mesi 4–6 · Lancio</p><h3 class="phase-title">Prima ondata di formati originali</h3><div class="phase-items"><span class="phase-tag">Premiere Notte Italiana</span><span class="phase-tag">Produzione Terzo Millennio (ep 1–3)</span><span class="phase-tag">RaiPlay 2.0 in produzione</span><span class="phase-tag">Social vertical unit operativa</span><span class="phase-tag">Accordi distribuzione TikTok e YouTube</span></div></div>
+        </article>
+
+        <article class="roadmap-phase q3">
+          <div class="phase-marker"><div class="phase-dot"></div><div class="phase-label">Q3</div></div>
+          <div class="phase-content"><p class="phase-period">Mesi 7–9 · Consolidamento</p><h3 class="phase-title">Espansione e community</h3><div class="phase-items"><span class="phase-tag">Lancio RaiPlay 2.0 pubblico</span><span class="phase-tag">Terzo Millennio completo</span><span class="phase-tag">Campo Largo debutto</span><span class="phase-tag">RAI Creator Network (10 partner)</span><span class="phase-tag">Primo live event phygital</span><span class="phase-tag">Analisi dati e ottimizzazione</span></div></div>
+        </article>
+
+        <article class="roadmap-phase q4">
+          <div class="phase-marker"><div class="phase-dot"></div><div class="phase-label">Q4</div></div>
+          <div class="phase-content"><p class="phase-period">Mesi 10–12 · Scala</p><h3 class="phase-title">Scala e istituzionalizzazione</h3><div class="phase-items"><span class="phase-tag">Seconda stagione formati validati</span><span class="phase-tag">Report pubblico impatto sociale</span><span class="phase-tag">25 creator partner attivi</span><span class="phase-tag">Internazionalizzazione contenuti IT</span><span class="phase-tag">Budget 2027 — piano pluriennale</span></div></div>
+        </article>
+      </div>
+
+      <aside class="sidebar-block reveal delay-3" style="margin-top:1.6rem;">
+        <h4>Investimento stimato · Anno 1</h4>
+        <div class="investment-grid">
+          <div class="investment-card"><p class="investment-title">Produzione contenuti</p><p class="investment-value"><span class="count-up" data-target="18" data-duration="2200" data-decimals="0" data-prefix="€" data-suffix="M">€0M</span></p></div>
+          <div class="investment-card"><p class="investment-title">Tech &amp; piattaforma</p><p class="investment-value"><span class="count-up" data-target="6" data-duration="2200" data-decimals="0" data-prefix="€" data-suffix="M">€0M</span></p></div>
+          <div class="investment-card"><p class="investment-title">Marketing &amp; distribuzione</p><p class="investment-value"><span class="count-up" data-target="4" data-duration="2200" data-decimals="0" data-prefix="€" data-suffix="M">€0M</span></p></div>
+          <div class="investment-card"><p class="investment-title">Creator network</p><p class="investment-value"><span class="count-up" data-target="2" data-duration="2200" data-decimals="0" data-prefix="€" data-suffix="M">€0M</span></p></div>
+        </div>
+        <p class="investment-note">Investimento totale stimato: <strong><span class="count-up" data-target="30" data-duration="2200" data-decimals="0" data-prefix="€" data-suffix="M">€0M</span> nel primo anno</strong>, equivalente a meno del 3% del budget RAI annuale. ROI atteso: recupero audience e valore canone percepito entro 36 mesi.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="closing" id="closing" data-theme="dark">
+    <div class="closing-eyebrow">Conclusione</div>
+    <div class="closing-quote">"Il servizio pubblico non è un'eredità da conservare — è una promessa da rinnovare. Ogni generazione merita una RAI che parli la sua lingua."</div>
+    <div class="closing-attribution">Team Marketing e Sviluppo · Business Game 2026</div>
+    <div class="closing-divider"></div>
+    <div class="closing-team">Progetto: <em>Evoluzione dei Modelli di Fruizione e Strategie di Rilancio del Pubblico RAI</em><br>Presentazione al SAA – School of Management · 26 Maggio 2026 · ore 9:15</div>
+  </section>
+
+  <div class="print-footer" data-theme="light">
+    <span>RAI — Radiotelevisione Italiana</span>
+    <span>Documento riservato · Business Game 2026</span>
+    <span>Uso interno · Team M&amp;S</span>
   </div>
-</div>
-</div>
-
-<div class="rule" style="max-width:1100px;margin:0 auto;"></div>
-
-<!-- SECTION 2: STRATEGIA -->
-<div id="strategia" class="dark-section">
-<div class="section" style="max-width:1100px;margin:0 auto;">
-  <div class="section-label reveal" style="color:#C0392B;">02 · Framework strategico</div>
-  <h2 class="section-title reveal delay-1">Tre pilastri.<br>Una sola direzione.</h2>
-  <p class="section-intro reveal delay-2">
-    La strategia non si basa su un singolo intervento ma su un ecosistema integrato. Contenuto, distribuzione e community devono evolvere in parallelo.
-  </p>
-
-  <div class="pillars reveal delay-2">
-    <div class="pillar">
-      <div class="pillar-num">I</div>
-      <div class="pillar-tag">Contenuto</div>
-      <div class="pillar-title">Innovazione Editoriale Radicale</div>
-      <div class="pillar-body">
-        Non è sufficiente mettere i programmi esistenti su RaiPlay. La RAI deve sviluppare formati nativi digitali, prodotti specificamente per la fruizione non lineare, con ritmi narrativi, estetica visiva e temi rilevanti per i 25–34enni.
-      </div>
-      <ul class="pillar-actions">
-        <li>Docuseries brevi (4–6 ep × 20') su temi identitari: lavoro, casa, futuro, cultura</li>
-        <li>Late night comedy talk con ospiti dall'ecosistema creator italiano</li>
-        <li>Podcast video con distribuzione cross-platform</li>
-        <li>Laboratorio formati: 10 pilot annuali con test A/B su RaiPlay</li>
-      </ul>
-    </div>
-    <div class="pillar">
-      <div class="pillar-num">II</div>
-      <div class="pillar-tag">Distribuzione</div>
-      <div class="pillar-title">Ecosistema Cross-Platform Integrato</div>
-      <div class="pillar-body">
-        TV lineare, RaiPlay, TikTok, YouTube, Podcast, Social: non canali separati ma un unico flusso narrativo dove ogni contenuto è progettato per circolare. Il palinsesto diventa punto di partenza, non di arrivo.
-      </div>
-      <ul class="pillar-actions">
-        <li>RaiPlay 2.0: UX riprogettata, raccomandazione algoritmica, profilo personale</li>
-        <li>Vertical content unit: team dedicato a TikTok e Reels per ogni show</li>
-        <li>Partnership YouTube per archivio storico e contenuti culturali</li>
-        <li>Distribution-first mindset: ogni produzione nasce già pensata per clip</li>
-      </ul>
-    </div>
-    <div class="pillar">
-      <div class="pillar-num">III</div>
-      <div class="pillar-tag">Community</div>
-      <div class="pillar-title">Partecipazione come Missione Pubblica</div>
-      <div class="pillar-body">
-        Il servizio pubblico ha un vantaggio competitivo unico: la legittimità culturale. Può fare quello che Netflix non può: coinvolgere, includere, abilitare la voce dei cittadini come parte del prodotto editoriale.
-      </div>
-      <ul class="pillar-actions">
-        <li>RAI Creator Network: programma di co-produzione con creator italiani</li>
-        <li>RAI Giovani: redazione under-30 integrata nelle strutture editoriali</li>
-        <li>Crowdsourcing editoriale su temi di interesse pubblico</li>
-        <li>Live events phygital legati ai programmi di punta</li>
-      </ul>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- SECTION 3: FORMATI -->
-<div id="formati">
-<div class="section">
-  <div class="section-label reveal">03 · Proposta editoriale</div>
-  <h2 class="section-title reveal delay-1">Nuovi formati per<br>nuove abitudini.</h2>
-  <p class="section-intro reveal delay-2">
-    Cinque format concreti, progettati per raggiungere il pubblico 25–40. Alcune idee originali, alcune adattamenti intelligenti di modelli già validati all'estero.
-  </p>
-
-  <table class="formats-table reveal delay-2">
-    <thead>
-      <tr>
-        <th>Format</th>
-        <th>Piattaforma primaria</th>
-        <th>Target</th>
-        <th>Tipo</th>
-        <th>Modello di riferimento</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <div class="format-name">Terzo Millennio</div>
-          <div style="font-size:0.78rem;color:#666;margin-top:0.3rem;">Docuserie 6 ep × 22' sull'Italia che cambia: lavoro, abitare, relazioni, identità</div>
-        </td>
-        <td>RaiPlay → Rai 3</td>
-        <td>25–38</td>
-        <td><span class="badge badge-new">Originale</span></td>
-        <td>Moving Out (ABC AU), Years &amp; Years (BBC)</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="format-name">Notte Italiana</div>
-          <div style="font-size:0.78rem;color:#666;margin-top:0.3rem;">Late night talk quotidiano, formato 35', con comedian e creator ospiti — ironia, attualità, cultura pop</div>
-        </td>
-        <td>RaiPlay first, Rai 2</td>
-        <td>22–35</td>
-        <td><span class="badge badge-new">Originale</span></td>
-        <td>Late Show, The Daily Show, Le Quotidien (FR)</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="format-name">Archivio Vivo</div>
-          <div style="font-size:0.78rem;color:#666;margin-top:0.3rem;">Rimontaggio creativo dell'archivio RAI in chiave moderna — il passato commentato con occhi nuovi</div>
-        </td>
-        <td>YouTube + RaiPlay</td>
-        <td>20–40</td>
-        <td><span class="badge badge-adapt">Adattamento</span></td>
-        <td>Everything Is Copy (archival), INA de France</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="format-name">Campo Largo</div>
-          <div style="font-size:0.78rem;color:#666;margin-top:0.3rem;">Debate show costruito su dati, con pubblico in studio e community online — politica senza urla</div>
-        </td>
-        <td>Rai 1 + Live streaming</td>
-        <td>28–45</td>
-        <td><span class="badge badge-adapt">Adattamento</span></td>
-        <td>Débat France 2, Hardtalk (BBC)</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="format-name">RAI × Creator</div>
-          <div style="font-size:0.78rem;color:#666;margin-top:0.3rem;">Co-produzioni mensili con creator italiani — contenuto ibrido: qualità RAI, autenticità creator</div>
-        </td>
-        <td>TikTok + YouTube + RaiPlay</td>
-        <td>18–30</td>
-        <td><span class="badge badge-collab">Co-produzione</span></td>
-        <td>BBC Three creator collabs, France TV slash</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="quote-box reveal delay-2">
-    <p>"La distinzione tra innovazione tecnologica e innovazione editoriale è cruciale: nuovi canali non bastano se il contenuto rimane lo stesso. Il cambiamento deve essere narrativo, non solo distributivo."</p>
-    <cite>Posizione strategica del team · Business Game 2026</cite>
-  </div>
-</div>
-</div>
-
-<!-- KPI SECTION -->
-<div id="kpi">
-<div class="kpi-block">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="section-label reveal" style="color:rgba(208,2,27,0.7);">04 · Obiettivi misurabili</div>
-    <h2 class="section-title reveal delay-1" style="color:white;">Target a 24 mesi.</h2>
-    <div class="kpi-grid">
-      <div class="kpi-item reveal delay-1">
-        <div class="kpi-name">Audience 25–40 su RaiPlay</div>
-        <div class="kpi-value">+120%</div>
-        <div class="kpi-note">Da 11% a 24% della composizione audience — avvicinamento al benchmark BBC</div>
-      </div>
-      <div class="kpi-item reveal delay-2">
-        <div class="kpi-name">Download mensili RaiPlay</div>
-        <div class="kpi-value">5M</div>
-        <div class="kpi-note">Da ~2.1M a 5M utenti attivi mensili nell'app, con sessioni medie superiori a 22 minuti</div>
-      </div>
-      <div class="kpi-item reveal delay-3">
-        <div class="kpi-name">Reach social organico</div>
-        <div class="kpi-value">80M</div>
-        <div class="kpi-note">Impression mensili cumulate su TikTok, YouTube e Instagram attraverso contenuti verticali nativi</div>
-      </div>
-      <div class="kpi-item reveal delay-4">
-        <div class="kpi-name">Formati nuovi in produzione</div>
-        <div class="kpi-value">10</div>
-        <div class="kpi-note">Pilot prodotti nel primo anno, con meccanismo di A/B testing e feedback community</div>
-      </div>
-      <div class="kpi-item reveal delay-5">
-        <div class="kpi-name">Partner creator attivi</div>
-        <div class="kpi-value">25</div>
-        <div class="kpi-note">Creator italiani con contratto di co-produzione attivo entro 18 mesi dall'avvio del programma</div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ROADMAP -->
-<div id="roadmap">
-<div class="section">
-  <div class="section-label reveal">05 · Piano operativo</div>
-  <h2 class="section-title reveal delay-1">Roadmap a 12 mesi.</h2>
-  <p class="section-intro reveal delay-2">
-    L'esecuzione è sequenziale ma non lineare: alcune iniziative partono in parallelo. La priorità assoluta è lanciare segnali visibili entro i primi 90 giorni.
-  </p>
-
-  <div class="roadmap reveal delay-2">
-    <div class="roadmap-phase q1">
-      <div class="phase-marker">
-        <div class="phase-dot"></div>
-        <div class="phase-label">Q1</div>
-      </div>
-      <div class="phase-content">
-        <div class="phase-period">Mesi 1–3 · Fondamenta</div>
-        <div class="phase-title">Setup strutturale e segnali rapidi</div>
-        <div class="phase-items">
-          <span class="phase-tag">Costituzione RAI Digital Lab</span>
-          <span class="phase-tag">Audit archivio storico</span>
-          <span class="phase-tag">Lancio Archivio Vivo su YouTube</span>
-          <span class="phase-tag">Selezione 5 creator partner</span>
-          <span class="phase-tag">Redesign UX RaiPlay (beta)</span>
-          <span class="phase-tag">Primo pilot RAI × Creator</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="roadmap-phase q2">
-      <div class="phase-marker">
-        <div class="phase-dot"></div>
-        <div class="phase-label">Q2</div>
-      </div>
-      <div class="phase-content">
-        <div class="phase-period">Mesi 4–6 · Lancio</div>
-        <div class="phase-title">Prima ondata di formati originali</div>
-        <div class="phase-items">
-          <span class="phase-tag">Premiere Notte Italiana</span>
-          <span class="phase-tag">Produzione Terzo Millennio (ep 1–3)</span>
-          <span class="phase-tag">RaiPlay 2.0 in produzione</span>
-          <span class="phase-tag">Social vertical unit operativa</span>
-          <span class="phase-tag">Accordi distribuzione TikTok e YouTube</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="roadmap-phase q3">
-      <div class="phase-marker">
-        <div class="phase-dot"></div>
-        <div class="phase-label">Q3</div>
-      </div>
-      <div class="phase-content">
-        <div class="phase-period">Mesi 7–9 · Consolidamento</div>
-        <div class="phase-title">Espansione e community</div>
-        <div class="phase-items">
-          <span class="phase-tag">Lancio RaiPlay 2.0 pubblico</span>
-          <span class="phase-tag">Terzo Millennio completo</span>
-          <span class="phase-tag">Campo Largo debutto</span>
-          <span class="phase-tag">RAI Creator Network (10 partner)</span>
-          <span class="phase-tag">Primo live event phygital</span>
-          <span class="phase-tag">Analisi dati e ottimizzazione</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="roadmap-phase q4">
-      <div class="phase-marker">
-        <div class="phase-dot"></div>
-        <div class="phase-label">Q4</div>
-      </div>
-      <div class="phase-content">
-        <div class="phase-period">Mesi 10–12 · Scala</div>
-        <div class="phase-title">Scala e istituzionalizzazione</div>
-        <div class="phase-items">
-          <span class="phase-tag">Seconda stagione formati validati</span>
-          <span class="phase-tag">Report pubblico impatto sociale</span>
-          <span class="phase-tag">25 creator partner attivi</span>
-          <span class="phase-tag">Internazionalizzazione contenuti IT</span>
-          <span class="phase-tag">Budget 2027 — piano pluriennale</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sidebar-block reveal delay-2" style="margin-top:2rem;">
-    <h4>Investimento stimato · Anno 1</h4>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;margin-top:0.5rem;">
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#999;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Produzione contenuti</div>
-        <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--rai-blue);">€18M</div>
-      </div>
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#999;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Tech &amp; piattaforma</div>
-        <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--rai-blue);">€6M</div>
-      </div>
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#999;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Marketing &amp; distribuzione</div>
-        <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--rai-blue);">€4M</div>
-      </div>
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#999;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Creator network</div>
-        <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--rai-blue);">€2M</div>
-      </div>
-    </div>
-    <p style="font-size:0.78rem;color:#888;margin-top:1rem;line-height:1.55;">Investimento totale stimato: <strong>€30M nel primo anno</strong>, equivalente a meno del 3% del budget RAI annuale. ROI atteso: recupero audience e valore canone percepito entro 36 mesi.</p>
-  </div>
-</div>
-</div>
-
-<!-- CLOSING -->
-<div class="closing">
-  <div class="closing-eyebrow">Conclusione</div>
-  <div class="closing-quote">
-    "Il servizio pubblico non è un'eredità da conservare — è una promessa da rinnovare. Ogni generazione merita una RAI che parli la sua lingua."
-  </div>
-  <div class="closing-attribution">Team Marketing e Sviluppo · Business Game 2026</div>
-  <div class="closing-divider"></div>
-  <div class="closing-team">
-    Progetto: <em>Evoluzione dei Modelli di Fruizione e Strategie di Rilancio del Pubblico RAI</em><br>
-    Presentazione al SAA – School of Management · 26 Maggio 2026 · ore 9:15
-  </div>
-</div>
-
-<!-- PRINT FOOTER -->
-<div class="print-footer">
-  <span>RAI — Radiotelevisione Italiana</span>
-  <span>Documento riservato · Business Game 2026</span>
-  <span>Uso interno · Team M&amp;S</span>
 </div>
 
 <script>
-  // Nav visibility on scroll
+(() => {
   const nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
-  });
+  const sectionLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const parallaxNodes = Array.from(document.querySelectorAll('[data-parallax]'));
+  const revealNodes = document.querySelectorAll('.reveal');
+  const counterContainers = document.querySelectorAll('[data-counter-group], .investment-card, .investment-note');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Intersection Observer for reveal animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in-view');
-        observer.unobserve(e.target);
+  const renderCounter = (el, value) => {
+    const decimals = Number.parseInt(el.dataset.decimals || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const formatted = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString();
+    el.textContent = `${prefix}${formatted}${suffix}`;
+  };
+
+  const animateCounter = (el) => {
+    if (el.dataset.animated === 'true') return;
+    el.dataset.animated = 'true';
+    const target = Number.parseFloat(el.dataset.target || '0');
+    const duration = Number.parseInt(el.dataset.duration || '2200', 10);
+
+    if (reducedMotion) {
+      renderCounter(el, target);
+      return;
+    }
+
+    const start = performance.now();
+    const frame = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      renderCounter(el, target * eased);
+      if (t < 1) requestAnimationFrame(frame);
+      else renderCounter(el, target);
+    };
+    requestAnimationFrame(frame);
+  };
+
+  document.querySelectorAll('.count-up').forEach((node) => renderCounter(node, 0));
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll('.count-up').forEach(animateCounter);
+      counterObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.22, rootMargin: '0px 0px -40px 0px' });
+
+  counterContainers.forEach((container) => counterObserver.observe(container));
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -55px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  revealNodes.forEach((node) => {
+    if (!node.classList.contains('in-view')) revealObserver.observe(node);
+  });
+
+  const themedSections = Array.from(document.querySelectorAll('[data-theme][id]'));
+
+  const setActiveLink = (id) => {
+    sectionLinks.forEach((link) => {
+      const active = link.getAttribute('href') === `#${id}`;
+      link.classList.toggle('active', active);
+    });
+  };
+
+  const updateNavTheme = () => {
+    const probeY = window.scrollY + nav.offsetHeight + window.innerHeight * 0.15;
+    let current = themedSections[0];
+    for (const sec of themedSections) {
+      if (probeY >= sec.offsetTop) current = sec;
+      else break;
+    }
+    const isDark = current.dataset.theme === 'dark';
+    nav.classList.toggle('nav-light', isDark);
+    nav.classList.toggle('nav-dark', !isDark);
+    if (current.id) setActiveLink(current.id);
+  };
+
+  let latestY = window.scrollY;
+  let ticking = false;
+
+  const applyParallax = () => {
+    parallaxNodes.forEach((node) => {
+      const speed = Number.parseFloat(node.dataset.speed || '0.05');
+      node.style.transform = `translate3d(0, ${Math.round(latestY * speed)}px, 0)`;
+    });
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    latestY = window.scrollY;
+    nav.classList.toggle('visible', latestY > window.innerHeight * 0.45);
+    updateNavTheme();
+    if (!reducedMotion && !ticking) {
+      ticking = true;
+      requestAnimationFrame(applyParallax);
+    }
+  };
+
+  updateNavTheme();
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', updateNavTheme, { passive: true });
+})();
 </script>
 </body>
 </html>
