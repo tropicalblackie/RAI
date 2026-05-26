@@ -82,6 +82,23 @@ body::before {
   border-bottom: 1px solid var(--line-light);
   backdrop-filter: blur(24px) saturate(155%);
 }
+.nav-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(208, 11, 39, 0.14);
+  overflow: hidden;
+}
+
+.nav-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--rai-red), var(--rai-red-neon));
+  transition: width 0.14s linear;
+}
 .nav.visible { transform: translateY(0); }
 .nav.nav-dark {
   background: rgba(250, 248, 245, 0.75);
@@ -686,6 +703,329 @@ body::before {
   background: rgba(255, 46, 76, 0.12);
 }
 
+.room-shell {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.room-intro {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.01);
+  padding: 1.4rem;
+  position: relative;
+}
+
+.room-intro::before,
+.room-intro::after,
+.room-card::before,
+.room-card::after,
+.rubric-card::before,
+.rubric-card::after,
+.ticket-card::before,
+.ticket-card::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.room-intro::before,
+.room-card::before,
+.rubric-card::before,
+.ticket-card::before {
+  top: 8px;
+  left: 8px;
+  border-top: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+}
+
+.room-intro::after,
+.room-card::after,
+.rubric-card::after,
+.ticket-card::after {
+  right: 8px;
+  bottom: 8px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+}
+
+.room-kicker {
+  margin: 0 0 0.45rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #667082;
+}
+
+.room-brand {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 4vw + 0.3rem, 3.2rem);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  background: linear-gradient(120deg, #0066CC 0%, #C6A25E 95%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.room-intro p {
+  margin: 0.72rem 0 0;
+  color: #505867;
+  font-size: 0.9rem;
+}
+
+.room-funnel {
+  margin-top: 0.95rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.funnel-step {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0.65rem;
+  font-size: 0.78rem;
+  color: #465061;
+}
+
+.funnel-step strong {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0066CC;
+  margin-bottom: 0.25rem;
+}
+
+.room-formats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.room-card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.01);
+  padding: 1rem;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.45s var(--ease-fluid), box-shadow 0.45s var(--ease-fluid), border-color 0.45s var(--ease-fluid);
+}
+
+.room-card:hover {
+  border-color: rgba(0, 102, 204, 0.25);
+  box-shadow: 0 12px 38px rgba(0, 102, 204, 0.1), 0 3px 8px rgba(0, 0, 0, 0.03);
+}
+
+.room-card h3 {
+  margin: 0.22rem 0 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  background: linear-gradient(120deg, #0066CC 10%, #C6A25E 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.room-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #4c5564;
+  line-height: 1.62;
+}
+
+.room-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 102, 204, 0.24);
+  border-radius: 999px;
+  padding: 0.14rem 0.48rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0066CC;
+  background: rgba(0, 102, 204, 0.05);
+}
+
+.room-rubrics {
+  display: grid;
+  gap: 0.56rem;
+}
+
+.rubric-card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.01);
+  overflow: hidden;
+  position: relative;
+}
+
+.rubric-trigger {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.rubric-title {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+  color: #1d1d1f;
+}
+
+.rubric-meta {
+  margin: 0.25rem 0 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6d7380;
+}
+
+.rubric-toggle {
+  align-self: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  color: #6d7482;
+}
+
+.rubric-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.75s var(--ease-fluid);
+}
+
+.rubric-panel-inner {
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0 1rem;
+}
+
+.rubric-card.open .rubric-panel {
+  grid-template-rows: 1fr;
+}
+
+.rubric-card.open .rubric-panel-inner {
+  padding: 0.84rem 1rem 1rem;
+}
+
+.rubric-card.open .rubric-toggle {
+  color: #0066CC;
+}
+
+.rubric-body {
+  margin: 0;
+  font-size: 0.81rem;
+  color: #4e5766;
+  line-height: 1.62;
+}
+
+.rubric-laser {
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, #0066CC, #C6A25E);
+  transition: width 0.75s var(--ease-fluid);
+}
+
+.rubric-card.open .rubric-laser {
+  width: 100%;
+}
+
+.room-flow {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0.7rem;
+}
+
+.flow-map,
+.ticketing {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.01);
+  padding: 1rem;
+  position: relative;
+}
+
+.flow-steps {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.flow-steps div {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 9px;
+  padding: 0.45rem;
+  font-size: 0.72rem;
+  color: #4f5867;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafd 100%);
+}
+
+.flow-steps strong {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0066CC;
+  margin-bottom: 0.2rem;
+}
+
+.ticket-list {
+  margin-top: 0.6rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.ticket-card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0.6rem;
+  position: relative;
+}
+
+.ticket-card h4 {
+  margin: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0066CC;
+}
+
+.ticket-card p {
+  margin: 0.24rem 0 0;
+  font-size: 0.75rem;
+  color: #505a69;
+}
+
 .kpi-shell {
   background:
     radial-gradient(1000px 560px at 85% -30%, rgba(14, 73, 181, 0.28), transparent 60%),
@@ -1084,15 +1424,15 @@ body::before {
 
 .reveal {
   opacity: 0;
-  transform: translateY(60px) rotateX(12deg) scale(0.96);
-  filter: blur(10px);
+  transform: translateY(36px) scale(0.97);
+  filter: blur(12px);
   transition: var(--transition-fluid);
   transform-origin: center top;
 }
 
 .reveal.in-view {
   opacity: 1;
-  transform: translateY(0) rotateX(0deg) scale(1);
+  transform: translateY(0) scale(1);
   filter: blur(0px);
 }
 
@@ -1118,6 +1458,9 @@ body::before {
   .scenario-grid { grid-template-columns: 1fr; }
   .investment-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .target-passports { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .room-formats,
+  .flow-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .room-flow { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
@@ -1125,7 +1468,7 @@ body::before {
   .nav-links { display: none; }
   .section-wrap { padding: 4rem 1rem; }
   .cover-top, .cover-body, .cover-bottom { padding-left: 1rem; padding-right: 1rem; }
-  .diagnosis-grid, .pillars, .stat-grid, .kpi-grid, .investment-grid, .target-passports { grid-template-columns: 1fr; }
+  .diagnosis-grid, .pillars, .stat-grid, .kpi-grid, .investment-grid, .target-passports, .room-formats, .flow-steps { grid-template-columns: 1fr; }
   .formats-table { display: block; overflow-x: auto; }
   .print-footer { flex-direction: column; align-items: flex-start; }
 }
@@ -1134,6 +1477,7 @@ body::before {
 <body>
 <div class="app">
   <nav class="nav nav-dark" id="mainNav">
+    <div class="nav-progress" aria-hidden="true"><span id="hudProgress"></span></div>
     <span class="nav-brand">RAI — Marketing &amp; Sviluppo · Business Game 2026</span>
     <ul class="nav-links">
       <li><a href="#scenario">Scenario</a></li>
@@ -1332,39 +1676,160 @@ body::before {
   <section class="formats-shell" id="formati" data-theme="light" data-parallax data-speed="0.025">
     <div class="section-wrap">
       <div class="section-label reveal">03 · Proposta editoriale</div>
-      <h2 class="section-title reveal delay-1">Nuovi formati per<br>nuove abitudini.</h2>
-      <p class="section-intro reveal delay-2">Cinque format concreti, progettati per raggiungere il pubblico 25–40. Alcune idee originali, alcune adattamenti intelligenti di modelli già validati all'estero.</p>
+      <h2 class="section-title reveal delay-1">Ecosistema Editoriale<br>RAI ROOM.</h2>
+      <p class="section-intro reveal delay-2">RAI ROOM è l'Hub editoriale su RaiPlay dedicato a raccontare l'Italia contemporanea attraverso inchieste, interviste, trend, cultura digitale, politica, società, giovani e creator. RaiPlay ospita il contenuto completo; Instagram e TikTok sono porte d'ingresso ad alta frequenza che intercettano il pubblico giovane tramite clip brevi e lo riportano alla piattaforma.</p>
 
-      <div class="reveal delay-2">
-        <table class="formats-table">
-          <thead>
-            <tr><th>Format</th><th>Piattaforma primaria</th><th>Target</th><th>Tipo</th><th>Modello di riferimento</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="format-name">Terzo Millennio</div><div class="format-desc">Docuserie 6 ep × 22' sull'Italia che cambia: lavoro, abitare, relazioni, identità</div></td>
-              <td>RaiPlay → Rai 3</td><td>25–38</td><td><span class="badge badge-new">Originale</span></td><td>Moving Out (ABC AU), Years &amp; Years (BBC)</td>
-            </tr>
-            <tr>
-              <td><div class="format-name">Notte Italiana</div><div class="format-desc">Late night talk quotidiano, formato 35', con comedian e creator ospiti — ironia, attualità, cultura pop</div></td>
-              <td>RaiPlay first, Rai 2</td><td>22–35</td><td><span class="badge badge-new">Originale</span></td><td>Late Show, The Daily Show, Le Quotidien (FR)</td>
-            </tr>
-            <tr>
-              <td><div class="format-name">Archivio Vivo</div><div class="format-desc">Rimontaggio creativo dell'archivio RAI in chiave moderna — il passato commentato con occhi nuovi</div></td>
-              <td>YouTube + RaiPlay</td><td>20–40</td><td><span class="badge badge-adapt">Adattamento</span></td><td>Everything Is Copy (archival), INA de France</td>
-            </tr>
-            <tr>
-              <td><div class="format-name">Campo Largo</div><div class="format-desc">Debate show costruito su dati, con pubblico in studio e community online — politica senza urla</div></td>
-              <td>Rai 1 + Live streaming</td><td>28–45</td><td><span class="badge badge-adapt">Adattamento</span></td><td>Débat France 2, Hardtalk (BBC)</td>
-            </tr>
-            <tr>
-              <td><div class="format-name">RAI × Creator</div><div class="format-desc">Co-produzioni mensili con creator italiani — contenuto ibrido: qualità RAI, autenticità creator</div></td>
-              <td>TikTok + YouTube + RaiPlay</td><td>18–30</td><td><span class="badge badge-collab">Co-produzione</span></td><td>BBC Three creator collabs, France TV slash</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="room-shell">
+        <article class="room-intro reveal delay-2">
+          <p class="room-kicker">Brand ombrello</p>
+          <h3 class="room-brand">RAI ROOM</h3>
+          <p>Contenitore podcast/video-podcast progettato per tenere insieme profondità editoriale e distribuzione social-native, con una regia narrativa coerente tra contenuto lungo e pillole verticali.</p>
+          <div class="room-funnel">
+            <div class="funnel-step"><strong>Step 1</strong>Episodio completo su RaiPlay</div>
+            <div class="funnel-step"><strong>Step 2</strong>Clip brevi su TikTok e Instagram</div>
+            <div class="funnel-step"><strong>Step 3</strong>Rimando al full content e conversione</div>
+          </div>
+        </article>
 
-        <div class="archive-contrast reveal delay-3">
+        <div class="room-formats reveal delay-3" id="roomFormatCards">
+          <article class="room-card">
+            <span class="room-badge">Originale</span>
+            <h3>Italia Senza Filtri</h3>
+            <p>Programma/inchiesta con tono diretto, giovane, non istituzionale. Affronta lavoro giovanile, università, affitti, creator economy, politica vista dai giovani, crisi climatica, nuove professioni, provincia vs grandi città senza retorica e senza filtri. Output: episodio completo su RaiPlay + clip brevi social.</p>
+          </article>
+          <article class="room-card">
+            <span class="room-badge">Originale</span>
+            <h3>Missione Italia 48 Ore</h3>
+            <p>Format di punta sul campo con ritmo e urgenza narrativa. Una squadra ha 48 ore per capire un fenomeno italiano (rider/gig economy, crisi degli affitti universitari, backstage di grandi eventi musicali, giovani imprenditori, piccoli comuni in rinascita). Struttura: lancio missione, arrivo sul campo, interviste rapide, problema centrale, tensione/scoperta, chiusura con dati e soluzioni. Hook TikTok: “Abbiamo 48 ore per capire...”.</p>
+          </article>
+          <article class="room-card">
+            <span class="room-badge">Originale</span>
+            <h3>Italia Upgrade</h3>
+            <p>Storie di innovazione, futuro e cambiamento: startup, intelligenza artificiale, sostenibilità, nuove città, mobilità, food innovation, università e ricerca. Taglio analitico-critico: “L'Italia sta davvero cambiando o sta solo raccontandosi meglio?”.</p>
+          </article>
+        </div>
+
+        <div class="room-rubrics reveal delay-3" id="roomRubrics">
+          <article class="rubric-card open">
+            <button class="rubric-trigger" type="button" aria-expanded="true">
+              <span>
+                <h4 class="rubric-title">Pillole</h4>
+                <p class="rubric-meta">Rubrica · Vertical clips</p>
+              </span>
+              <span class="rubric-toggle">Apri</span>
+            </button>
+            <div class="rubric-panel">
+              <div class="rubric-panel-inner">
+                <p class="rubric-body">Clip verticali (30-90 secondi) per TikTok, Reels e Shorts con frasi forti, dati scioccanti, domande provocatorie o risposte virali. CTA: “Guarda l’inchiesta completa su RaiPlay”.</p>
+              </div>
+            </div>
+            <div class="rubric-laser" aria-hidden="true"></div>
+          </article>
+
+          <article class="rubric-card">
+            <button class="rubric-trigger" type="button" aria-expanded="false">
+              <span>
+                <h4 class="rubric-title">Dietro le quinte di</h4>
+                <p class="rubric-meta">Rubrica · Backstage</p>
+              </span>
+              <span class="rubric-toggle">Apri</span>
+            </button>
+            <div class="rubric-panel">
+              <div class="rubric-panel-inner">
+                <p class="rubric-body">Accesso esclusivo e autentico alla preparazione ospiti, ai momenti off-camera e alle reazioni vere per umanizzare il brand editoriale e aumentare prossimità con la community.</p>
+              </div>
+            </div>
+            <div class="rubric-laser" aria-hidden="true"></div>
+          </article>
+
+          <article class="rubric-card">
+            <button class="rubric-trigger" type="button" aria-expanded="false">
+              <span>
+                <h4 class="rubric-title">Trend Influencer</h4>
+                <p class="rubric-meta">Rubrica · Creator economy</p>
+              </span>
+              <span class="rubric-toggle">Apri</span>
+            </button>
+            <div class="rubric-panel">
+              <div class="rubric-panel-inner">
+                <p class="rubric-body">Rubrica analitica sui trend digitali e la creator economy: perché un trend esplode, come monetizzano i creator, impatto di TikTok sulla politica e ruolo degli influencer come nuovi media/aziende.</p>
+              </div>
+            </div>
+            <div class="rubric-laser" aria-hidden="true"></div>
+          </article>
+
+          <article class="rubric-card">
+            <button class="rubric-trigger" type="button" aria-expanded="false">
+              <span>
+                <h4 class="rubric-title">Domande Scomode</h4>
+                <p class="rubric-meta">Rubrica · Interviste dirette</p>
+              </span>
+              <span class="rubric-toggle">Apri</span>
+            </button>
+            <div class="rubric-panel">
+              <div class="rubric-panel-inner">
+                <p class="rubric-body">Interviste incalzanti a politici, creator e artisti con le domande del pubblico: “Perché dovremmo fidarci?”, “Quanto guadagni?”, “Ti senti responsabile?”, “Stai usando i giovani?”.</p>
+              </div>
+            </div>
+            <div class="rubric-laser" aria-hidden="true"></div>
+          </article>
+
+          <article class="rubric-card">
+            <button class="rubric-trigger" type="button" aria-expanded="false">
+              <span>
+                <h4 class="rubric-title">Fuori dal Feed (La Settimana Senza Filtri)</h4>
+                <p class="rubric-meta">Rubrica · Weekly recap</p>
+              </span>
+              <span class="rubric-toggle">Apri</span>
+            </button>
+            <div class="rubric-panel">
+              <div class="rubric-panel-inner">
+                <p class="rubric-body">Recap settimanale rapido delle notizie più importanti spiegato in chiave social-native, con focus su perché quella notizia riguarda concretamente i giovani.</p>
+              </div>
+            </div>
+            <div class="rubric-laser" aria-hidden="true"></div>
+          </article>
+        </div>
+
+        <div class="room-flow reveal delay-4">
+          <article class="flow-map">
+            <p class="room-kicker">Strategia multipiattaforma</p>
+            <h3 class="room-brand" style="font-size:clamp(1.35rem,2.7vw + 0.25rem,2rem);">Flusso contenuto e conversione</h3>
+            <div class="flow-steps">
+              <div><strong>Step 01</strong>Episodio RaiPlay</div>
+              <div><strong>Step 02</strong>Estrazione 5-10 Pillole</div>
+              <div><strong>Step 03</strong>Distribuzione TikTok/Instagram</div>
+              <div><strong>Step 04</strong>Rimando a RaiPlay</div>
+              <div><strong>Step 05</strong>Promozione RAI ROOM Live</div>
+              <div><strong>Step 06</strong>Registrazione live + Extra</div>
+            </div>
+            <p style="margin:0.7rem 0 0;font-size:0.81rem;color:#4b5362;">RAI ROOM Live: podcast dal vivo in auditorium con registrazione live, ospite principale, panel con esperti, domande dal pubblico, momenti interattivi, backstage social e meet &amp; greet.</p>
+          </article>
+
+          <aside class="ticketing">
+            <p class="room-kicker">Accesso / Ticketing</p>
+            <div class="ticket-list">
+              <article class="ticket-card">
+                <h4>Free / Student Ticket</h4>
+                <p>Accesso base per studenti e community giovani.</p>
+              </article>
+              <article class="ticket-card">
+                <h4>Standard Ticket</h4>
+                <p>Accesso all'evento live in auditorium.</p>
+              </article>
+              <article class="ticket-card">
+                <h4>Premium Ticket</h4>
+                <p>Accesso prioritario + meet &amp; greet + contenuti esclusivi post-evento.</p>
+              </article>
+              <article class="ticket-card">
+                <h4>Partner / University Ticket</h4>
+                <p>Pacchetti dedicati ad associazioni studentesche, scuole e università.</p>
+              </article>
+            </div>
+          </aside>
+        </div>
+
+        <div class="archive-contrast reveal delay-4">
           <p class="archive-contrast-title">Archivio Vivo · Ieri vs Domani</p>
           <div class="archive-morph">
             <p class="archive-old">Memoria analogica del servizio pubblico</p>
@@ -1474,6 +1939,7 @@ body::before {
 <script>
 (() => {
   const nav = document.getElementById('mainNav');
+  const hudProgress = document.getElementById('hudProgress');
   const sectionLinks = Array.from(document.querySelectorAll('.nav-links a'));
   const parallaxNodes = Array.from(document.querySelectorAll('[data-parallax]'));
   const revealNodes = document.querySelectorAll('.reveal');
@@ -1482,6 +1948,8 @@ body::before {
   const roadmapLine = document.querySelector('.roadmap-line');
   const roadmapProgress = document.getElementById('roadmapProgress');
   const roadmapPhases = Array.from(document.querySelectorAll('.roadmap-phase'));
+  const roomRubrics = document.getElementById('roomRubrics');
+  const roomTiltCards = Array.from(document.querySelectorAll('#roomFormatCards .room-card'));
 
   const renderCounter = (el, value) => {
     const decimals = Number.parseInt(el.dataset.decimals || '0', 10);
@@ -1496,6 +1964,21 @@ body::before {
     el.dataset.animated = 'true';
     const target = Number.parseFloat(el.dataset.target || '0');
     const duration = Number.parseInt(el.dataset.duration || '2200', 10);
+    const decimals = Number.parseInt(el.dataset.decimals || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+
+    const randomChar = () => {
+      const glyphs = '0123456789#?*';
+      return glyphs[Math.floor(Math.random() * glyphs.length)];
+    };
+
+    const glitchText = () => {
+      const len = Math.max(2, `${Math.round(Math.abs(target))}`.length + (decimals > 0 ? 2 : 0));
+      let out = '';
+      for (let i = 0; i < len; i += 1) out += randomChar();
+      return `${prefix}${out}${suffix}`;
+    };
 
     if (reducedMotion) {
       renderCounter(el, target);
@@ -1505,8 +1988,12 @@ body::before {
     const start = performance.now();
     const frame = (now) => {
       const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      renderCounter(el, target * eased);
+      if (t < 0.24) {
+        el.textContent = glitchText();
+      } else {
+        const eased = 1 - Math.pow(1 - t, 3);
+        renderCounter(el, target * eased);
+      }
       if (t < 1) requestAnimationFrame(frame);
       else renderCounter(el, target);
     };
@@ -1574,6 +2061,12 @@ body::before {
   const onScroll = () => {
     latestY = window.scrollY;
     nav.classList.toggle('visible', latestY > window.innerHeight * 0.45);
+    if (hudProgress) {
+      const doc = document.documentElement;
+      const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const pct = Math.max(0, Math.min(1, latestY / max));
+      hudProgress.style.width = `${(pct * 100).toFixed(2)}%`;
+    }
     updateNavTheme();
     if (roadmapLine && roadmapProgress) {
       const rect = roadmapLine.getBoundingClientRect();
@@ -1597,6 +2090,41 @@ body::before {
       requestAnimationFrame(applyParallax);
     }
   };
+
+  if (roomRubrics) {
+    roomRubrics.addEventListener('click', (event) => {
+      const trigger = event.target.closest('.rubric-trigger');
+      if (!trigger) return;
+      const card = trigger.closest('.rubric-card');
+      const isOpen = card.classList.contains('open');
+      roomRubrics.querySelectorAll('.rubric-card').forEach((item) => {
+        item.classList.remove('open');
+        const btn = item.querySelector('.rubric-trigger');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        card.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+
+  if (!reducedMotion) {
+    roomTiltCards.forEach((card) => {
+      const maxTilt = 8;
+      card.addEventListener('mousemove', (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+        const rotateY = (x - 0.5) * maxTilt;
+        const rotateX = (0.5 - y) * maxTilt;
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+  }
 
   updateNavTheme();
   onScroll();
